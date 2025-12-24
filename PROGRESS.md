@@ -5,3 +5,7 @@
  - Konfigurerat React Router
  - Skapat .env i projektroten.
 
+
+## Day 2 – 2025-12-24
+ - Defined Product and Cart related types.
+ - Implemented basic cart state management.
