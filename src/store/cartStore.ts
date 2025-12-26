@@ -37,21 +37,9 @@ export const useCartStore = create<CartStore> ((set) =>({
     },
     updateQuantity: (productId: number, quantity: number) =>{
         set((state) => {
-            const index = state.items.findIndex(
-                (item) => item.productId === productId
-              );
-          
-              if (index === -1) {
-                return state; // 或者 { items: state.items }
-              }
-          
-              const updatedItems = [...state.items];
-              updatedItems[index] = {
-                ...updatedItems[index],
-                quantity,
-              };
-          
-              return { items: updatedItems };
+            return {
+                items: state.items.map((item) => item.productId === productId ? {...item,quantity} : item),
+            }
         })
     },
     clearCart: () => {set({ items: [] });},
