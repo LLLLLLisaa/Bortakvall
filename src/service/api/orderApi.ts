@@ -9,7 +9,7 @@ import type { OrderPayload } from "../../types/Order";
  * @param userId -- the Id of user for who places the order
  * @returns ApiResponse indicating whether the order was successfully created
  */
-export async function order(orderPayload:OrderPayload, userId: number):Promise<ApiResponse<void>>{
+export async function createOrder(orderPayload:OrderPayload, userId: number):Promise<ApiResponse<void>>{
     const response = await api.post<ApiResponse<void>>(`/users/${userId}/orders`,orderPayload);
     return response.data;
 }
