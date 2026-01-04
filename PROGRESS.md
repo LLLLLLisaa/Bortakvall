@@ -26,3 +26,4 @@
  - Enabled navigation to HomePage by clicking the site title in Header
  - Implemented a responsive TagBar component that displays product categories derived dynamically from product tags.
  - Each category links to its corresponding TagPage using dynamic routing.
+ - Created a basic Footer component for the webshop.

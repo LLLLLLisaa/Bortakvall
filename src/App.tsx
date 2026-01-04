@@ -11,6 +11,7 @@ import TagPage from "./pages/TagPage";
 import ErrorPage from "./pages/ErrorPage";
 import { Header } from "./components/Header";
 import { TagBar } from "./components/TagBar";
+import { Footer } from "./components/Footer";
 
 
 function App() {
@@ -41,29 +42,30 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <TagBar categories ={categoryNames} />
-        <Routes>        
-          <Route path="/" element={<HomePage />} />
+        <TagBar categories ={categoryNames} />
+          <Routes>        
+            <Route path="/" element={<HomePage />} />
 
-          <Route path="products">
-            <Route path=":id" element={<ProductPage />} />
-          </Route>
+            <Route path="products">
+              <Route path=":id" element={<ProductPage />} />
+            </Route>
 
-          <Route path="tags">
-            <Route path=":category" element={<TagPage />} />
-            {/* <Route path=":tagId" element={<TagPage />} /> */}
-          </Route>
+            <Route path="tags">
+              <Route path=":category" element={<TagPage />} />
+              {/* <Route path=":tagId" element={<TagPage />} /> */}
+            </Route>
 
-          <Route path="cart" element={<CartPage />} />
-        
-          <Route path="checkout" element={<CheckoutPage />} />
-
-          <Route path="success">
-            <Route path=":orderId" element={<SuccessPage />} />
-          </Route>
+            <Route path="cart" element={<CartPage />} />
           
-          <Route path="error" element={<ErrorPage />} />
-        </Routes>        
+            <Route path="checkout" element={<CheckoutPage />} />
+
+            <Route path="success">
+              <Route path=":orderId" element={<SuccessPage />} />
+            </Route>
+            
+            <Route path="error" element={<ErrorPage />} />
+          </Routes> 
+      <Footer />       
     </BrowserRouter>
   );
 }
