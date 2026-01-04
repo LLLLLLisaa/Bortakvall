@@ -43,7 +43,7 @@ export default function HomePage() {
 
     return (
         <main className="container">
-            <h1 className="my-4">All products</h1>
+            <h1 className="my-4 text-center">All products</h1>
 
             <div className="row">
             {products.map(product => (

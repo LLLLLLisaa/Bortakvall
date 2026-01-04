@@ -11,5 +11,16 @@
  - Implemented basic cart state management.
 
 
- ## Day 3 – 2025-12-26
-  - Implemented API layer for products, tags and orders.
+## Day 3 – 2025-12-26
+ - Implemented API layer for products, tags and orders.
+
+
+## Day 4 – 2026-01-03
+ - Implemented initial HomePage structure
+ - Built reusable ProductCard component
+ - Enabled navigation from product cards to ProductPage
+
+
+## Day 5 – 2026-01-04
+ - Created global Header component and placed it in App
+ - Enabled navigation to HomePage by clicking the site title in Header
