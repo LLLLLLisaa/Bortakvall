@@ -11,10 +11,15 @@
  * Navigate to homepage
  */
 
-
 import { useParams } from "react-router-dom";
+
 export default function TagPage() {
-  const { id } = useParams();
-    
-  return <h1>TagProduct {id}</h1>;
-  }
+  const { category } = useParams<{ category: string }>();
+
+  return (
+    <main className="container">
+      <h1 className="my-4">Category: {category}</h1>
+      <p>This page will show products for this category later.</p>
+    </main>
+  );
+}

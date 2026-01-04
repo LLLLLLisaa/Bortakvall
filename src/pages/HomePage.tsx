@@ -43,17 +43,17 @@ export default function HomePage() {
 
     return (
         <main className="container">
-            <h1 className="my-4 text-center">All products</h1>
+            <h1 className="my-4 d-none d-lg-block">All products</h1>
 
             <div className="row">
-            {products.map(product => (
-                <div
-                key={product.id}
-                className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
-                >
-                <ProductCard product={product} />
-                </div>
-            ))}
+                {products.map(product => (
+                    <div
+                    key={product.id}
+                    className="col-12 col-sm-6 col-md-4 col-lg-3 mb-4"
+                    >
+                    <ProductCard product={product} />
+                    </div>
+                ))}
             </div>
         </main>
       ); 

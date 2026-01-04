@@ -24,3 +24,5 @@
 ## Day 5 – 2026-01-04
  - Created global Header component and placed it in App
  - Enabled navigation to HomePage by clicking the site title in Header
+ - Implemented a responsive TagBar component that displays product categories derived dynamically from product tags.
+ - Each category links to its corresponding TagPage using dynamic routing.
