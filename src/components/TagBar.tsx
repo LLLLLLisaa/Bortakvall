@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import type { Category } from "../types/Category";
 
 /**
  * TagBar component
@@ -14,7 +15,7 @@ import { Link } from "react-router-dom";
  */
 
 type TagBarProps = {
-  categories: string[];
+  categories: Category[];
 };
 
 export function TagBar({ categories }: TagBarProps) {
@@ -29,10 +30,10 @@ export function TagBar({ categories }: TagBarProps) {
           </Link>
         </li>
 
-        {categories.map(category => (
-          <li key={category} className="nav-item">
-            <Link className="nav-link" to={`/tags/${category}`}>
-              {category}
+        {categories.map(tag => (
+          <li key={tag.name} className="nav-item">
+            <Link className="nav-link" to={`/tags/${tag.slug}`}>
+              {tag.name}
             </Link>
           </li>
         ))}
@@ -56,13 +57,13 @@ export function TagBar({ categories }: TagBarProps) {
             </Link>
           </li>
 
-          {categories.map(category => (
-            <li key={category}>
+          {categories.map(tag => (
+            <li key={tag.name}>
               <Link
                 className="dropdown-item"
-                to={`/tags/${category}`}
+                to={`/tags/${tag.slug}`}
               >
-                {category}
+                {tag.name}
               </Link>
             </li>
           ))}

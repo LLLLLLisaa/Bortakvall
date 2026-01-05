@@ -27,3 +27,9 @@
     export interface ProductDetail extends Product{
         description: string;
     }
+
+    /**
+ * Category is a UI-friendly subset of Tag,
+ * used for navigation and filtering.
+ */
+export type Category = Pick<ProductTag, "name" | "slug">;

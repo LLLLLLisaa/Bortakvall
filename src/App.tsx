@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { getProducts } from "./service/api/productApi";
+import type { Category } from "./types/Product";
 
 import HomePage from "./pages/HomePage";
 import ProductPage from "./pages/ProductPage";
@@ -12,6 +13,7 @@ import ErrorPage from "./pages/ErrorPage";
 import { Header } from "./components/Header";
 import { TagBar } from "./components/TagBar";
 import { Footer } from "./components/Footer";
+
 
 
 function App() {
@@ -26,13 +28,24 @@ function App() {
  *
  * @returns {void}
  */
-  const [categoryNames, setCategoryNames] = useState<string[]>([]);
+
+  const [categories, setCategories] = useState<Category[]>([]);
+  
   useEffect(()=>{
     async function fetchTags(){
       const response = await getProducts();
-      const tagNames = response.data.flatMap(product => product.tags.map(tag=>tag.name));
-      const categoryNames = Array.from(new Set(tagNames));
-      setCategoryNames(categoryNames);
+      const allTags = response.data.flatMap(product => product.tags);
+      const uniqueMap = new Map<string, Category>();
+
+    allTags.forEach(tag => {
+      uniqueMap.set(tag.slug, {
+        name: tag.name,
+        slug: tag.slug,
+      });
+    });
+
+    setCategories(Array.from(uniqueMap.values()));
+      
     }
     fetchTags();
   },[])
@@ -42,7 +55,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-        <TagBar categories ={categoryNames} />
+        <TagBar categories ={categories} />
           <Routes>        
             <Route path="/" element={<HomePage />} />
 
