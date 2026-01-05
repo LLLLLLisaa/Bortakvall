@@ -31,3 +31,4 @@
 
 ## Day 6 – 2026-01-05
  - Implemented a Loading component to indicate data fetching state, and an error component to display a message when data loading fails.
+ - Implemented an Error component to display user-friendly error messages when data fetching fails.

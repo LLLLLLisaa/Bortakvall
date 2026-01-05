@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import type { Product } from "../types/Product";
 import Loading from "../components/Loading";
+import Error from "../components/Error";
 
 /**
  * Data needed
@@ -33,7 +34,7 @@ import Loading from "../components/Loading";
 export default function HomePage() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null);
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
     useEffect (() => {
         async function fetchProducts() {
@@ -41,7 +42,8 @@ export default function HomePage() {
               const response = await getProducts();
               setProducts(response.data)
           } catch (error) {
-            setError("Failed to load products"); 
+            console.error(error);  /* "Error" --- show for developer */
+            setErrorMsg("Failed to load products");   /* "ErrorMsg" --- show for user */
           }finally{
             setLoading(false);
           }
@@ -50,7 +52,7 @@ export default function HomePage() {
     },[])
 
     if (loading) return <Loading />;
-    if (error) return <p>{error}</p>;
+    if (errorMsg) return <Error message ={errorMsg} />;
 
     return (
         <main className="container">
