@@ -27,3 +27,7 @@
  - Implemented a responsive TagBar component that displays product categories derived dynamically from product tags.
  - Each category links to its corresponding TagPage using dynamic routing.
  - Created a basic Footer component for the webshop.
+
+
+## Day 6 – 2026-01-05
+ - Implemented a Loading component to indicate data fetching state, and an error component to display a message when data loading fails.

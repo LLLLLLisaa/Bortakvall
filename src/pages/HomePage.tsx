@@ -2,6 +2,7 @@ import { getProducts } from "../service/api/productApi";
 import { useEffect, useState } from "react";
 import { ProductCard } from "../components/ProductCard";
 import type { Product } from "../types/Product";
+import Loading from "../components/Loading";
 
 /**
  * Data needed
@@ -17,12 +18,22 @@ import type { Product } from "../types/Product";
  * Navigate to tag page
  */
 
+/**
+ * HomePage
+ *
+ * Displays a list of all products in the webshop.
+ *
+ * - Fetches product data from the API on initial render
+ * - Handles loading and error states
+ * - Renders products using the ProductCard component
+ *
+ * This page serves as the main entry point of the webshop.
+ */
+
 export default function HomePage() {
     const [products, setProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-
-    const IMG_BASE = import.meta.env.VITE_IMAGE_BASE;
 
     useEffect (() => {
         async function fetchProducts() {
@@ -38,7 +49,7 @@ export default function HomePage() {
         fetchProducts();
     },[])
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return <Loading />;
     if (error) return <p>{error}</p>;
 
     return (
