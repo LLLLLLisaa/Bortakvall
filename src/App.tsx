@@ -32,15 +32,17 @@ function App() {
   const [categories, setCategories] = useState<Category[]>([]);
   
   useEffect(()=>{
+
     async function fetchTags(){
       const response = await getProducts();
       const allTags = response.data.flatMap(product => product.tags);
-      const uniqueMap = new Map<string, Category>();
+      const uniqueMap = new Map<number, Category>();
 
     allTags.forEach(tag => {
-      uniqueMap.set(tag.slug, {
+      uniqueMap.set(tag.id, {
+        id: tag.id,
         name: tag.name,
-        slug: tag.slug,
+       
       });
     });
 
@@ -64,8 +66,8 @@ function App() {
             </Route>
 
             <Route path="tags">
-              <Route path=":category" element={<TagPage />} />
-              {/* <Route path=":tagId" element={<TagPage />} /> */}
+             {/*  <Route path=":category" element={<TagPage />} /> */}
+              <Route path=":tagId" element={<TagPage />} />
             </Route>
 
             <Route path="cart" element={<CartPage />} />

@@ -32,3 +32,6 @@
 ## Day 6 – 2026-01-05
  - Implemented a Loading component to indicate data fetching state, and an error component to display a message when data loading fails.
  - Implemented an Error component to display user-friendly error messages when data fetching fails.
+ - Implemented the TagPage to display products filtered by a selected tag.
+  - Created a TagProduct union type to align with the API response structure for tag-based queries, which made it possible to correctly extract and use the returned products array.
+  - Used useParams to extract the tagId from the URL and passed it to the API function to retrieve products associated with the selected tag.

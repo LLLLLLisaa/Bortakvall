@@ -32,7 +32,7 @@ export function TagBar({ categories }: TagBarProps) {
 
         {categories.map(tag => (
           <li key={tag.name} className="nav-item">
-            <Link className="nav-link" to={`/tags/${tag.slug}`}>
+            <Link className="nav-link" to={`/tags/${tag.id}`}>
               {tag.name}
             </Link>
           </li>
@@ -61,7 +61,7 @@ export function TagBar({ categories }: TagBarProps) {
             <li key={tag.name}>
               <Link
                 className="dropdown-item"
-                to={`/tags/${tag.slug}`}
+                to={`/tags/${tag.id}`}
               >
                 {tag.name}
               </Link>

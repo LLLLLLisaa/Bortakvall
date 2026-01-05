@@ -6,20 +6,6 @@ import Loading from "../components/Loading";
 import Error from "../components/Error";
 
 /**
- * Data needed
- * List of Products -1
- * List of tags
- * Loading state for products -1
- * Loading state of tags
- * Error state（tags/products) -1
- * 
- * Page action
- * Fetch all products -1
- * Navigate to product detail page -1
- * Navigate to tag page
- */
-
-/**
  * HomePage
  *
  * Displays a list of all products in the webshop.
@@ -70,6 +56,4 @@ export default function HomePage() {
             </div>
         </main>
       ); 
-
-
   }

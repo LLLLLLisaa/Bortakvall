@@ -11,25 +11,27 @@
         id: number;
         name: string;
         price: number;
-        on_sale: boolean;
-        images: Images;
-        stock_status: StockStatus;
-        stock_quantity: number | null;
-        tags: ProductTag[];
+        images: Images;    
+        tags: Tag[];
     }
 
-    export interface ProductTag{
+    export interface Tag{
         id: number;
         name: string;
         slug: string;
     }
 
     export interface ProductDetail extends Product{
-        description: string;
+        on_sale: boolean;
+        stock_status: StockStatus;
+        stock_quantity: number | null;
     }
 
     /**
  * Category is a UI-friendly subset of Tag,
  * used for navigation and filtering.
  */
-export type Category = Pick<ProductTag, "name" | "slug">;
+export type Category = Pick<Tag, "id" | "name">;
+export type TagProduct = Tag & {
+    products: Product[];
+  };
