@@ -1,11 +1,11 @@
 import {create} from "zustand";
 import type { CartProduct } from "../types/Cart";
-import type { ProductDetail } from "../types/Product";
+import type { ProductDetail,Product } from "../types/Product";
 
 interface CartStore {
     items: CartProduct[];
     totalItems: number;
-    addToCart: (product: ProductDetail, quantity: number) => void;
+    addToCart: (product: ProductDetail | Product, quantity: number) => void;
     removeFromCart: (productId: number) => void;
     updateQuantity: (productId: number, quantity: number) => void;
     clearCart: () => void;

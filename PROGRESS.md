@@ -41,3 +41,8 @@
  - Implementerat en separat ProductPage för visning av enskilda produkter
  - Standardiserat all användargränssnittstext till svenska för konsekvent lokalisering
  - Uppdaterat getProductById i API-lagret så att metoden returnerar ProductDetail i stället för grundtypen Product
+ - Implemented cart state integration on ProductPage
+ - Added responsive cart navigation to Header with item count
+ - Extended ProductCard to support adding products to the cart
+   - Added “Add to cart” action on product cards with default quantity handling
+   - Connected ProductCard directly to the global cart state (Zustand store)

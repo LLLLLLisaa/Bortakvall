@@ -11,11 +11,11 @@ export function Header() {
     <header
       className="mb-4"
       style={{
-        background: "linear-gradient(90deg, #ffe4ec, #f3e8ff)",
+        background: "linear-gradient(90deg,#F9D6DC)",
       }}
     >
         {/* Top bar */}
-        <div className="bg-white">
+        <div style={{ backgroundColor: "#ffffff" }}>
             <div className="container d-flex justify-content-end align-items-center py-2">
                 <Link
                     to="/cart"
