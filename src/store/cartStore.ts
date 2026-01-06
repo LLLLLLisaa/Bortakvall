@@ -4,6 +4,7 @@ import type { ProductDetail } from "../types/Product";
 
 interface CartStore {
     items: CartProduct[];
+    totalItems: number;
     addToCart: (product: ProductDetail, quantity: number) => void;
     removeFromCart: (productId: number) => void;
     updateQuantity: (productId: number, quantity: number) => void;
@@ -13,6 +14,7 @@ interface CartStore {
 //define store
 export const useCartStore = create<CartStore> ((set) =>({
     items: [],
+    totalItems: 0,
     addToCart: (product,quantity) => {
         set((state) => {
             return {
