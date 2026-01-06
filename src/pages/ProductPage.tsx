@@ -23,8 +23,10 @@ import { getProductById } from "../service/api/productApi";
 import type { ProductDetail } from "../types/Product";
 import Loading from "../components/Loading";
 import Error from "../components/Error";
+import { useCartStore } from "../store/cartStore";
 
 export default function ProductPage() {
+    
     const IMAGE_BAS = import.meta.env.VITE_IMAGE_BASE;
 
     const { id } = useParams();
@@ -33,6 +35,7 @@ export default function ProductPage() {
     const [count, setCount] = useState(1);
     const [product, setProduct]= useState<ProductDetail|null>(null);
         
+    const addToCart = useCartStore((state) => state.addToCart);
 
 
     useEffect(()=>{
@@ -123,13 +126,25 @@ export default function ProductPage() {
                     <input
                     type="number"
                     min={1}
+                    max={product.stock_quantity ?? undefined}
                     value={count}
-                    onChange={(e) => setCount(Number(e.target.value))}
+                    onChange={(e) => { 
+                        const inputValue = Number(e.target.value);
+                        setCount(Number.isNaN(inputValue)?1:inputValue)}
+                       }
                     className="form-control"
                     style={{ width: "80px" }}
                     />
 
-                    <button className="btn btn-primary px-4">
+                    <button 
+                    className="btn btn-primary px-4"
+                    disabled={product.stock_status !== "instock"}
+                    onClick={()=>{
+                        if(count>0){                       
+                        addToCart(product,count)
+                        setCount(1)
+                    }}
+                        }>
                     Lägg i kundvagn
                     </button>
                 </div>

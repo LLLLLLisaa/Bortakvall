@@ -1,10 +1,10 @@
 import {create} from "zustand";
 import type { CartProduct } from "../types/Cart";
-import type { Product } from "../types/Product";
+import type { ProductDetail } from "../types/Product";
 
 interface CartStore {
     items: CartProduct[];
-    addToCart: (product: Product) => void;
+    addToCart: (product: ProductDetail, quantity: number) => void;
     removeFromCart: (productId: number) => void;
     updateQuantity: (productId: number, quantity: number) => void;
     clearCart: () => void;
@@ -13,14 +13,14 @@ interface CartStore {
 //define store
 export const useCartStore = create<CartStore> ((set) =>({
     items: [],
-    addToCart: (product) => {
+    addToCart: (product,quantity) => {
         set((state) => {
             return {
                 items: [...state.items, {
                     productId: product.id,
                     name: product.name,
                     price: product.price,
-                    quantity: 1
+                    quantity,
                 }]
 
             }
