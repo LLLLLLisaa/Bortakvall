@@ -9,7 +9,7 @@ export default function Loading() {
       <main className="container d-flex justify-content-center align-items-center" style={{ minHeight: "60vh" }}>
         <div className="text-center">
           <div className="spinner-border text-secondary mb-3" role="status" />
-          <p className="text-muted">Loading, please wait...</p>
+          <p className="text-muted">Laddar…</p>
         </div>
       </main>
     );

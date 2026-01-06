@@ -49,7 +49,7 @@ export default function TagPage() {
             setTagName(tagName);
         } catch (error) {
           console.error(error);  /* "Error" --- show for developer */
-          setErrorMsg("Failed to load products");   /* "ErrorMsg" --- show for user */
+          setErrorMsg("Kunde inte ladda produkten");   /* "ErrorMsg" --- show for user */
         }finally{
           setLoading(false);
         }

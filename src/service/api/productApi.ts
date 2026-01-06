@@ -1,6 +1,6 @@
 import { api } from "./api";
 import type { ApiResponse } from "../../types/ApiResponse";
-import type { Product, Tag, TagProduct } from "../../types/Product";
+import type { Product, Tag, TagProduct,ProductDetail } from "../../types/Product";
 
 /**
  * Get all products.
@@ -11,13 +11,14 @@ export async function getProducts():Promise<ApiResponse<Product[]>>{
     return response.data;
 }
 
+
 /**
  * Get special product.
  * @param productId--unique id for product
  * @returns ApiResponse containing the product
  */
-export async function getProductById(productId:number):Promise<ApiResponse<Product>>{
-    const response = await api.get<ApiResponse<Product>>(`/products/${productId}`);
+export async function getProductById(productId:number):Promise<ApiResponse<ProductDetail>>{
+    const response = await api.get<ApiResponse<ProductDetail>>(`/products/${productId}`);
     return response.data
 }
 

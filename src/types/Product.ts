@@ -25,6 +25,7 @@
         on_sale: boolean;
         stock_status: StockStatus;
         stock_quantity: number | null;
+        description: string;
     }
 
     /**

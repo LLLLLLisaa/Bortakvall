@@ -9,7 +9,6 @@ import CartPage from "./pages/CartPage";
 import CheckoutPage from "./pages/CheckoutPage";
 import SuccessPage from "./pages/SuccessPage";
 import TagPage from "./pages/TagPage";
-import ErrorPage from "./pages/ErrorPage";
 import { Header } from "./components/Header";
 import { TagBar } from "./components/TagBar";
 import { Footer } from "./components/Footer";
@@ -78,7 +77,6 @@ function App() {
               <Route path=":orderId" element={<SuccessPage />} />
             </Route>
             
-            <Route path="error" element={<ErrorPage />} />
           </Routes> 
       <Footer />       
     </BrowserRouter>

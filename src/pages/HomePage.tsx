@@ -29,7 +29,7 @@ export default function HomePage() {
               setProducts(response.data)
           } catch (error) {
             console.error(error);  /* "Error" --- show for developer */
-            setErrorMsg("Failed to load products");   /* "ErrorMsg" --- show for user */
+            setErrorMsg("Kunde inte ladda produkten");   /* "ErrorMsg" --- show for user */
           }finally{
             setLoading(false);
           }
@@ -42,7 +42,7 @@ export default function HomePage() {
 
     return (
         <main className="container">
-            <h1 className="my-4 d-none d-lg-block">All products</h1>
+            <h1 className="my-4 d-none d-lg-block">Alla producter</h1>
 
             <div className="row">
                 {products.map(product => (

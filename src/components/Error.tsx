@@ -5,7 +5,7 @@ type ErrorProps = {
   export default function Error({ message }: ErrorProps) {
     return (
       <p>
-        {message ?? "Something went wrong. Please try again later."}
+        {message ?? "Något gick fel. Försök igen senare."}
       </p>
     );
   }

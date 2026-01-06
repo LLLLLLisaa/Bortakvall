@@ -26,7 +26,7 @@ export function TagBar({ categories }: TagBarProps) {
       <ul className="nav justify-content-center gap-3 d-none d-lg-flex">
         <li className="nav-item">
           <Link className="nav-link" to="/">
-            All products
+            Alla producter
           </Link>
         </li>
 
@@ -47,13 +47,13 @@ export function TagBar({ categories }: TagBarProps) {
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
-          Categories
+          Kategorier
         </button>
 
         <ul className="dropdown-menu">
           <li>
             <Link className="dropdown-item" to="/">
-              All products
+              Alla producter
             </Link>
           </li>
 
