@@ -24,9 +24,17 @@ export function getCartItems():CartItem[]{
 }
 
 export function addToCart(product: Product, quantity: number=1):void{
+    const productStock =
+    product.stock_status === "outofstock"
+      ? 0
+      : product.stock_quantity ?? 0;
+
+  if (productStock === 0) return;
+
     const existing = cart.find(item => item.productId === product.id);
 
     if(existing){
+        if (existing.quantity + quantity > existing.productStock) return;
         existing.quantity += quantity;
     }else {
         cart.push({
@@ -34,6 +42,7 @@ export function addToCart(product: Product, quantity: number=1):void{
             name: product.name,
             image: product.images,
             price: product.price,
+            productStock,
             quantity,
         })
     }
@@ -54,6 +63,7 @@ export function updateQuantity(
   ): void {
     const item = cart.find(i => i.productId === productId);
     if (!item) return;
+    if(item.quantity + delta > item.productStock) return;
   
     item.quantity += delta;
   

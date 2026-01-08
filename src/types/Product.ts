@@ -13,6 +13,8 @@
         price: number;
         images: Images;    
         tags: Tag[];
+        stock_status: StockStatus;
+        stock_quantity: number | null;
     }
 
     export interface Tag{
@@ -22,9 +24,6 @@
     }
 
     export interface ProductDetail extends Product{
-        on_sale: boolean;
-        stock_status: StockStatus;
-        stock_quantity: number | null;
         description: string;
     }
 
