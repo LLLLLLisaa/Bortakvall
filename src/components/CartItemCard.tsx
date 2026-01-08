@@ -13,31 +13,35 @@ export function CartItemCard({
   onDecrease,
   onRemove,
 }: Props) {
+    const IMAGE_BAS = import.meta.env.VITE_IMAGE_BASE;
+
   return (
     <div className="card mb-3">
       <div className="row g-0 align-items-center">
-        <div className="col-md-3 text-center">
+
+        {/* Image */}
+        <div className="col-3 text-center">
           <img
-            src={item.image}
+            src={`${IMAGE_BAS}${item.image?.thumbnail}`}
             alt={item.name}
-            className="img-fluid rounded-start"
+            className="img-fluid rounded w-75"
           />
         </div>
 
-        <div className="col-md-9">
-          <div className="card-body d-flex flex-column h-100">
-            <div>
-              <h5 className="card-title mb-1">{item.name}</h5>
-              <p className="mb-1">Price: {item.price} kr</p>
-              <p className="mb-0">
-                Subtotal: {item.price * item.quantity} kr
-              </p>
-            </div>
+        {/* Info */}
+        <div className="col-9">
+          <div className="card-body py-2">
+            <h6 className="card-title mb-1">{item.name}</h6>
 
-            <div className="mt-auto d-flex justify-content-between align-items-center">
-              <div className="btn-group" role="group">
+            <p className="mb-2 fw-semibold">
+                {item.price * item.quantity} kr
+            </p>
+
+            <div className="d-flex justify-content-between align-items-center mt-2">
+              
+              {/* Quantity controls */}
+              <div className="btn-group btn-group-sm">
                 <button
-                  type="button"
                   className="btn btn-outline-secondary"
                   onClick={onDecrease}
                 >
@@ -47,7 +51,6 @@ export function CartItemCard({
                   {item.quantity}
                 </span>
                 <button
-                  type="button"
                   className="btn btn-outline-secondary"
                   onClick={onIncrease}
                 >
@@ -55,17 +58,17 @@ export function CartItemCard({
                 </button>
               </div>
 
+              {/* Remove */}
               <button
-                type="button"
-                className="btn btn-outline-danger"
+                className="btn btn-outline-danger btn-sm"
                 onClick={onRemove}
-                aria-label="Remove item"
               >
-                🗑
+                🗑️
               </button>
             </div>
           </div>
         </div>
+
       </div>
     </div>
   );

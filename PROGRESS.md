@@ -53,3 +53,5 @@
    - implemented cart operations including adding items, updating quantities, removing items, clearing the cart, and calculating item subtotals and total price.
    - Derived values such as subtotals and total price are calculated dynamically instead of being stored in state, ensuring data consistency and maintainability.
  - Implemented a reusable cart item card
+ - Implemented the Cart page to display items added to the shopping cart.
+ - Updated the cart store to manage global cart state using Zustand.

@@ -13,18 +13,18 @@ export function getCartItems():CartItem[]{
     return [...cart];
 }
 
-export function addToCart(product: Product):void{
+export function addToCart(product: Product, quantity: number=1):void{
     const existing = cart.find(item => item.productId === product.id);
 
     if(existing){
-        existing.quantity += 1;
+        existing.quantity += quantity;
     }else {
         cart.push({
             productId: product.id,
             name: product.name,
-            image: product.images.thumbnail,
+            image: product.images,
             price: product.price,
-            quantity: 1,
+            quantity,
         })
     }
 }
