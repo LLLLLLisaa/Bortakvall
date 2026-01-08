@@ -7,7 +7,17 @@ import type { Product } from "../types/Product";
  * @returns {CartItem[]} Array of cart items
  */
 
-let cart: CartItem[]=[];
+const CART_STORAGE_KEY = "cart";
+function loadCart(): CartItem[] {
+    const raw = localStorage.getItem(CART_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : [];
+}
+
+function saveCart(cart: CartItem[]): void {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+}
+
+let cart: CartItem[] = loadCart();
 
 export function getCartItems():CartItem[]{
     return [...cart];
@@ -27,6 +37,7 @@ export function addToCart(product: Product, quantity: number=1):void{
             quantity,
         })
     }
+    saveCart(cart);
 }
 
 export function getItemSubtotal(item: CartItem): number {
@@ -49,6 +60,7 @@ export function updateQuantity(
     if (item.quantity <= 0) {
       cart = cart.filter(i => i.productId !== productId);
     }
+    saveCart(cart);
   }
   
 
@@ -68,6 +80,7 @@ export function decreaseQuantity(
 
 export function removeItem(productId: number):void {
     cart = cart.filter(item => item.productId !== productId);
+    saveCart(cart);
 
 }
 

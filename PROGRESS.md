@@ -55,3 +55,4 @@
  - Implemented a reusable cart item card
  - Implemented the Cart page to display items added to the shopping cart.
  - Updated the cart store to manage global cart state using Zustand.
+ - Verified that cart state remains consistent across page refreshes before checkout.
