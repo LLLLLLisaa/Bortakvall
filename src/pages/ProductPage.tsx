@@ -15,6 +15,21 @@
  * Navigate to tagPage
  */
 
+/**
+ * ProductPage
+ *
+ * Displays detailed information for a single product.
+ *
+ * Responsibilities:
+ * - Fetch product details by product id from API
+ * - Show product image, name, description, price and stock status
+ * - Allow user to select quantity
+ * - Add selected product and quantity to the cart
+ *
+ * Integration:
+ * - Uses global cart store (Zustand) to manage cart state
+ */
+
 
 
 import { useEffect, useState } from "react";

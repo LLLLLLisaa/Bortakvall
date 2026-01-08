@@ -1,5 +1,5 @@
 //type---CartProduct/CartItem
-export interface CartProduct {
+export interface CartItem {
     productId: number;
     name: string;
     price: number;

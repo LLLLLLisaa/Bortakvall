@@ -46,3 +46,9 @@
  - Extended ProductCard to support adding products to the cart
    - Added “Add to cart” action on product cards with default quantity handling
    - Connected ProductCard directly to the global cart state (Zustand store)
+
+
+## Day 8 – 2026-01-08
+ - Implemented the core shopping cart business logic in a dedicated service layer.
+   - implemented cart operations including adding items, updating quantities, removing items, clearing the cart, and calculating item subtotals and total price.
+   - Derived values such as subtotals and total price are calculated dynamically instead of being stored in state, ensuring data consistency and maintainability.
