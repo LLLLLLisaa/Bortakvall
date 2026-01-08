@@ -52,3 +52,4 @@
  - Implemented the core shopping cart business logic in a dedicated service layer.
    - implemented cart operations including adding items, updating quantities, removing items, clearing the cart, and calculating item subtotals and total price.
    - Derived values such as subtotals and total price are calculated dynamically instead of being stored in state, ensuring data consistency and maintainability.
+ - Implemented a reusable cart item card

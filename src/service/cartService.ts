@@ -1,6 +1,12 @@
 import type { CartItem } from "../types/Cart";
 import type { Product } from "../types/Product";
 
+/**
+ * Returns a shallow copy of all items currently in the cart.
+ *
+ * @returns {CartItem[]} Array of cart items
+ */
+
 let cart: CartItem[]=[];
 
 export function getCartItems():CartItem[]{
