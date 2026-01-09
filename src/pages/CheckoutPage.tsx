@@ -14,9 +14,9 @@
  * Navigate to successpage
  */
 
-import { CartItemCard } from "../components/CartItemCard";
 import { useCartStore } from "../store/cartStore";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { createOrder, buildOrderPayload } from "../service/orderService";
 import type { Customer } from "../types/Order";
 import { initialCustomer } from "../types/Order";
@@ -25,19 +25,23 @@ import { OrderItemCard } from "../components/OrderItemCard";
 
 
 
-
-
 export default function CheckoutPage() {
-    const { items, totalPris, increaseQuantity, decreaseQuantity,removeFromCart } = useCartStore();
+    const navigate =useNavigate();
+    const { items, totalPris, increaseQuantity, decreaseQuantity, clearCart} = useCartStore();
     const [customer, setCustomer] = useState<Customer>(initialCustomer);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const USER_ID = 90;
+    const USER_ID = import.meta.env.VITE_USER_ID
 
     const handleSubmit = async ()=>{
         try {
             setErrorMsg(null);
             const orderPayload = buildOrderPayload(customer,items,totalPris);
-            await createOrder(orderPayload, USER_ID);
+            const response = await createOrder(orderPayload, USER_ID);
+            clearCart();
+            const orderId = response.data.id;
+
+            navigate(`/success/${orderId}`);
+   
         } catch (error) {
             console.error(error);   
             setErrorMsg("Kunde inte lägga beställningen. Försök igen.");
