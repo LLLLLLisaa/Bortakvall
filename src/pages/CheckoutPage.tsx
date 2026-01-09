@@ -19,7 +19,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createOrder, buildOrderPayload } from "../service/orderService";
 import type { Customer } from "../types/Order";
-import { initialCustomer } from "../types/Order";
 import { CustomerForm } from "../components/CustomerForm";
 import { OrderItemCard } from "../components/OrderItemCard";
 import Error from "../components/Error";
@@ -29,7 +28,15 @@ import Error from "../components/Error";
 export default function CheckoutPage() {
     const navigate =useNavigate();
     const { items, totalPris, increaseQuantity, decreaseQuantity, clearCart} = useCartStore();
-    const [customer, setCustomer] = useState<Customer>(initialCustomer);
+    const [customer, setCustomer] = useState<Customer>({
+        customer_first_name: "",
+        customer_last_name: "",
+        customer_address: "",
+        customer_postcode: "",
+        customer_city: "",
+        customer_email: "",
+        customer_phone: "",
+    });
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     const USER_ID = Number(import.meta.env.VITE_USER_ID);
 

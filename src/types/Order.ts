@@ -38,14 +38,3 @@ export interface Customer {
     customer_phone?: string,
 }
 
-export const initialCustomer: Customer = {
-    customer_first_name: "",
-    customer_last_name: "",
-    customer_address: "",
-    customer_postcode: "",
-    customer_city: "",
-    customer_email: "",
-    customer_phone: "",
-  };
-  
-
