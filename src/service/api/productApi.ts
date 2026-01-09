@@ -19,6 +19,7 @@ export async function getProducts():Promise<ApiResponse<Product[]>>{
  */
 export async function getProductById(productId:number):Promise<ApiResponse<ProductDetail>>{
     const response = await api.get<ApiResponse<ProductDetail>>(`/products/${productId}`);
+    
     return response.data
 }
 
@@ -28,6 +29,7 @@ export async function getProductById(productId:number):Promise<ApiResponse<Produ
  */
 export async function getTags():Promise<ApiResponse<Tag[]>>{
     const response = await api.get<ApiResponse<Tag[]>>("/tags");
+    console.log("*******response.datadata", response.data.data)
     return response.data;
 }
 
@@ -38,5 +40,6 @@ export async function getTags():Promise<ApiResponse<Tag[]>>{
  */
 export async function getProductsByTagId(tagId:number):Promise<ApiResponse<TagProduct>>{
     const response = await api.get<ApiResponse<TagProduct>>(`/tags/${tagId}`);  
+    console.log("*******response.datadata", response.data.data)
     return response.data;
 }
