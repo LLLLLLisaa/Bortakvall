@@ -22,6 +22,7 @@ import type { Customer } from "../types/Order";
 import { initialCustomer } from "../types/Order";
 import { CustomerForm } from "../components/CustomerForm";
 import { OrderItemCard } from "../components/OrderItemCard";
+import Error from "../components/Error";
 
 
 
@@ -30,7 +31,7 @@ export default function CheckoutPage() {
     const { items, totalPris, increaseQuantity, decreaseQuantity, clearCart} = useCartStore();
     const [customer, setCustomer] = useState<Customer>(initialCustomer);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
-    const USER_ID = import.meta.env.VITE_USER_ID
+    const USER_ID = Number(import.meta.env.VITE_USER_ID);
 
     const handleSubmit = async ()=>{
         try {
@@ -52,12 +53,8 @@ export default function CheckoutPage() {
         <div className="container mt-4">
           <h1 className="mb-4">Kassa</h1>
       
-          {errorMsg && (
-            <div className="alert alert-danger">
-              Kunde inte lägga beställningen. Försök igen.
-            </div>
-          )}
-      
+          {errorMsg && <Error message={errorMsg} />}
+
           {/* Orderöversikt */}
          <div className="card mb-4">
             <div className="card-body bg-success bg-opacity-10 rounded">

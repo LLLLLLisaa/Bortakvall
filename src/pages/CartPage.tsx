@@ -16,15 +16,13 @@
 import { useNavigate } from "react-router-dom";
 import { CartItemCard } from "../components/CartItemCard";
 import { useCartStore } from "../store/cartStore";
-import Loading from "../components/Loading";
+import { useState } from "react";
 import Error from "../components/Error";
-
 
 export default function CartPage() {
   
   const navigate = useNavigate();
-  
-
+  const [errorMsg, setErrorMsg]=useState<string | null>(null);
   const {
     items,
     totalPris,
@@ -32,6 +30,17 @@ export default function CartPage() {
     decreaseQuantity,
     removeFromCart,
   } = useCartStore();
+
+  const handleIncrease = (productId: number) =>{
+    setErrorMsg(null);
+    try {
+      increaseQuantity(productId);
+      
+    } catch (error) {
+      console.error(error);
+      setErrorMsg("Det går inte att lägga till fler av denna produkt.");  
+    }
+  }
 
 
   if (items.length === 0) {
@@ -47,11 +56,13 @@ export default function CartPage() {
     <div className="container mt-4">
       <h3 className="mb-4">Varukorg</h3>
 
+      {errorMsg && <Error message={errorMsg} />}
+
       {items.map((item) => (
         <CartItemCard
           key={item.productId}
           item={item}
-          onIncrease={() => increaseQuantity(item.productId)}
+          onIncrease={() => handleIncrease(item.productId)}
           onDecrease={() => decreaseQuantity(item.productId)}
           onRemove={() => removeFromCart(item.productId)}
         />

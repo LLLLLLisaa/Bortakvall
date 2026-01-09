@@ -1,7 +1,7 @@
 import {create} from "zustand";
 import type { CartItem } from "../types/Cart";
 import type { ProductDetail,Product } from "../types/Product";
-import * as cartService from "../service/cartStorage";
+import * as cartService from "../storage/cartStorage";
 
 /**
  * CartStore defines the global cart state and available cart actions.
