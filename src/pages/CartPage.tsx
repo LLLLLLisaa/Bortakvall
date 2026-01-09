@@ -16,10 +16,14 @@
 import { useNavigate } from "react-router-dom";
 import { CartItemCard } from "../components/CartItemCard";
 import { useCartStore } from "../store/cartStore";
+import Loading from "../components/Loading";
+import Error from "../components/Error";
+
 
 export default function CartPage() {
   
   const navigate = useNavigate();
+  
 
   const {
     items,
@@ -37,6 +41,7 @@ export default function CartPage() {
       </div>
     );
   }
+
 
   return (
     <div className="container mt-4">

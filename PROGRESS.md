@@ -56,3 +56,10 @@
  - Implemented the Cart page to display items added to the shopping cart.
  - Updated the cart store to manage global cart state using Zustand.
  - Verified that cart state remains consistent across page refreshes before checkout.
+
+
+## Day 9 – 2026-01-09
+ - Implemented Checkout (Order) page
+   - Created OrderItemCard component to display order items with quantity controls
+   - Added CustomerForm component for delivery address input
+   - Implemented orderService for creating orders via API
