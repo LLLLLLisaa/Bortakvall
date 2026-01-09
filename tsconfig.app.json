@@ -23,6 +23,7 @@
       "@components/*": ["components/*"],
       "@models/*": ["types/*"],
       "@storage/*": ["storage/*"],
+      "@page/*": ["pages/*"],
     },
 
     /* Linting */

@@ -1,17 +1,17 @@
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { getProducts } from "./service/api/productApi";
-import type { Category } from "./types/Product";
 
-import HomePage from "./pages/HomePage";
-import ProductPage from "./pages/ProductPage";
-import CartPage from "./pages/CartPage";
-import CheckoutPage from "./pages/CheckoutPage";
-import SuccessPage from "./pages/SuccessPage";
-import TagPage from "./pages/TagPage";
-import { Header } from "./components/Header";
-import { TagBar } from "./components/TagBar";
-import { Footer } from "./components/Footer";
+import type { Category } from "@models/Product";
+import HomePage from "@page/HomePage";
+import ProductPage from "@page/ProductPage";
+import CartPage from "@page/CartPage";
+import CheckoutPage from "@page/CheckoutPage";
+import SuccessPage from "@page/SuccessPage";
+import TagPage from "@page/TagPage";
+import { Header } from "@components/Header";
+import { TagBar } from "@components/TagBar";
+import { Footer } from "@components/Footer";
+import * as productService from "@service/productService";
 
 
 
@@ -30,28 +30,16 @@ function App() {
 
   const [categories, setCategories] = useState<Category[]>([]);
   
-  useEffect(()=>{
-
-    async function fetchTags(){
-      const response = await getProducts();
-      const allTags = response.data.flatMap(product => product.tags);
-      const uniqueMap = new Map<number, Category>();
-
-    allTags.forEach(tag => {
-      uniqueMap.set(tag.id, {
-        id: tag.id,
-        name: tag.name,
-       
-      });
-    });
-
-    setCategories(Array.from(uniqueMap.values()));
-      
-    }
-    fetchTags();
-  },[])
-
-
+  useEffect(() => {
+    (async () => {
+      try {
+        const categories = await productService.fetchAllTags();
+        setCategories(categories);
+      } catch (error) {
+        console.error(error);
+      }
+    })();
+  }, []);
 
   return (
     <BrowserRouter>
