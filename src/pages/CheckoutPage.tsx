@@ -48,7 +48,10 @@ export default function CheckoutPage() {
             clearCart();
             const orderId = response.data.id;
 
-            navigate(`/success/${orderId}`);
+            navigate(`/success/${orderId}`,{
+                state:{
+                    order: response.data,},
+            });
    
         } catch (error) {
             console.error(error);   

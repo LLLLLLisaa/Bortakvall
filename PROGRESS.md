@@ -63,3 +63,8 @@
    - Created OrderItemCard component to display order items with quantity controls
    - Added CustomerForm component for delivery address input
    - Implemented orderService for creating orders via API
+ - Implemented order success page showing confirmation details (order number, total amount and order date).
+   Used route state to pass order data from checkout instead of global store to avoid unnecessary complexity.
+
+
+

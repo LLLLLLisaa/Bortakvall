@@ -13,7 +13,5 @@ import type { OrderResponse } from "../../types/Order";
 export async function post(orderPayload:OrderPayload, userId: number):Promise<ApiResponse<OrderResponse>>{
     
     const response = await api.post<ApiResponse<OrderResponse>>(`/users/${userId}/orders`,orderPayload);
-    console.log("---------payload",orderPayload)
-    console.log("*******OrderResponse******",response.data);
     return response.data;
 }
