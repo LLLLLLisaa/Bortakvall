@@ -4,9 +4,9 @@ type ErrorProps = {
   
   export default function Error({ message }: ErrorProps) {
     return (
-      <p>
-        {message ?? "Något gick fel. Försök igen senare."}
-      </p>
+      <div className="alert alert-danger my-3" role="alert">
+      {message ?? "Något gick fel. Försök igen senare."}
+    </div>
     );
   }
-  
+ 

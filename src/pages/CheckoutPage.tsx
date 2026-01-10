@@ -51,14 +51,14 @@ export default function CheckoutPage() {
         try {
             setErrorMsg(null);
             const orderPayload = buildOrderPayload(customer,items,totalPris);
-            const order = await submitOrder(orderPayload, USER_ID);
+            const response = await submitOrder(orderPayload, USER_ID);
             clearCart();
             localStorage.removeItem(CUSTOMER_STORAGE_KEY);
-            //const orderId = response.data.id;
+            const orderId = response.data.id;
 
-            navigate(`/success/${order.data.id}`,{
+            navigate(`/success/${orderId}`,{
                 state:{
-                    order},
+                    order: response.data,},
             });
    
         } catch (error) {
@@ -74,13 +74,17 @@ export default function CheckoutPage() {
         );
       }, [customer]);
 
-      if (errorMsg) return <Error message ={errorMsg} />;
-
     return (
         <div className="container mt-4">
           <h1 className="mb-4">Kassa</h1>
       
           {errorMsg && <Error message={errorMsg} />}
+
+        {/*  {errorMsg && (
+  <div style={{ background: "red", color: "white", padding: "16px" }}>
+    ERROR: {errorMsg}
+  </div>
+)} */}
 
           {/* Orderöversikt */}
          <div className="card mb-4">
