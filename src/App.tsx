@@ -2,16 +2,19 @@ import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import type { Category } from "@models/Product";
+
 import HomePage from "@page/HomePage";
 import ProductPage from "@page/ProductPage";
 import CartPage from "@page/CartPage";
 import CheckoutPage from "@page/CheckoutPage";
 import SuccessPage from "@page/SuccessPage";
 import TagPage from "@page/TagPage";
+
 import { Header } from "@components/Header";
 import { TagBar } from "@components/TagBar";
 import { Footer } from "@components/Footer";
-import * as productService from "@service/productService";
+
+import {fetchAllTags} from "@service/productService";
 
 
 
@@ -33,7 +36,7 @@ function App() {
   useEffect(() => {
     (async () => {
       try {
-        const categories = await productService.fetchAllTags();
+        const categories = await fetchAllTags();
         setCategories(categories);
       } catch (error) {
         console.error(error);

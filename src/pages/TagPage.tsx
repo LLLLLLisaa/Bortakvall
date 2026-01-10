@@ -1,11 +1,12 @@
 
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductsByTagId } from "../service/api/productApi";
-import type { Product } from "../types/Product";
-import Loading from "../components/Loading";
-import Error from "../components/Error";
-import { ProductCard } from "../components/ProductCard";
+
+import type { Product} from "@models/Product";
+import Loading from "@components/Loading";
+import Error from "@components/Error";
+import { ProductCard } from "@components/ProductCard";
+import { fetchProductsByTagId } from "@service/productService";
 
 /**
  * TagPage
@@ -39,22 +40,23 @@ export default function TagPage() {
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
 
-  useEffect (() => {
-      async function fetchTagProducts() {
-        try {
-            const response = await getProductsByTagId(Number(tagId));
-            const products:Product[] = response.data.products;
-            const tagName = response.data.name
-            setProducts(products)
-            setTagName(tagName);
-        } catch (error) {
-          console.error(error);  /* "Error" --- show for developer */
-          setErrorMsg("Kunde inte ladda produkten");   /* "ErrorMsg" --- show for user */
-        }finally{
-          setLoading(false);
-        }
+  useEffect(()=>{
+    if(!tagId) return;
+    (async() =>{
+      try {
+        const tagProduct = await fetchProductsByTagId(Number(tagId));
+        const products: Product[] = tagProduct.products
+        const tagName = tagProduct.name
+        setProducts(products);
+        setTagName(tagName);
+      } catch (error) {
+        console.error(error);
+        setErrorMsg("Kunde inte ladda produktern under tag")
+        
+      }finally{
+        setLoading(false)
       }
-      fetchTagProducts();
+    })();
   },[tagId])
 
     if (loading) return <Loading />;

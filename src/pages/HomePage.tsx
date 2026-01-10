@@ -1,9 +1,9 @@
-import { getProducts } from "../service/api/productApi";
 import { useEffect, useState } from "react";
-import { ProductCard } from "../components/ProductCard";
-import type { Product } from "../types/Product";
-import Loading from "../components/Loading";
-import Error from "../components/Error";
+import { ProductCard } from "@components/ProductCard";
+import type { Product } from "@models/Product";
+import Loading from "@components/Loading";
+import Error from "@components/Error";
+import { fetchAllProducts }  from "@service/productService"
 
 /**
  * HomePage
@@ -22,19 +22,20 @@ export default function HomePage() {
     const [loading, setLoading] = useState(true);
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
-    useEffect (() => {
-        async function fetchProducts() {
-          try {
-              const response = await getProducts();
-              setProducts(response.data)
-          } catch (error) {
-            console.error(error);  /* "Error" --- show for developer */
-            setErrorMsg("Kunde inte ladda produkten");   /* "ErrorMsg" --- show for user */
+    useEffect(() =>{
+        (async() =>{
+           try {
+            const products = await fetchAllProducts();
+            setProducts(products)
+            
+           } catch (error) {
+            console.error(error);
+            setErrorMsg("Kunde inte ladda produkter")
           }finally{
             setLoading(false);
           }
-        }
-        fetchProducts();
+        })
+        ();
     },[])
 
     if (loading) return <Loading />;
@@ -42,7 +43,7 @@ export default function HomePage() {
 
     return (
         <main className="container">
-            <h1 className="my-4 d-none d-lg-block">Alla producter</h1>
+            <h1 className="my-4 d-none d-lg-block">Alla produkter</h1>
 
             <div className="row">
                 {products.map(product => (

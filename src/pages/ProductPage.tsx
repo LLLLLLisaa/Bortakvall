@@ -34,11 +34,12 @@
 
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { getProductById } from "../service/api/productApi";
-import type { ProductDetail } from "../types/Product";
-import Loading from "../components/Loading";
-import Error from "../components/Error";
-import { useCartStore } from "../store/cartStore";
+
+import type { ProductDetail } from "@models/Product";
+import Loading from "@components/Loading";
+import Error from "@components/Error";
+import { useCartStore } from "@store/cartStore";
+import { fetchProductById } from "@service/productService";
 
 export default function ProductPage() {
     
@@ -54,19 +55,22 @@ export default function ProductPage() {
 
 
     useEffect(()=>{
-        async function fetchProductById() {
+        if(!id) return;
+
+        setLoading(true);
+        setErrorMsg(null);
+        
+        (async() =>{
             try {
-                const response = await getProductById(Number(id));
-                const product = response.data;
+                const product = await fetchProductById(Number(id));
                 setProduct(product);
             } catch (error) {
-                console.error(error);  /* "Error" --- show for developer */
-                setErrorMsg("Kunde inte ladda produkten");   /* "ErrorMsg" --- show for user */    
-            } finally{
+                console.error(error);
+                setErrorMsg("Kunde inte ladda produkten");   
+            }finally{
                 setLoading(false);
             }
-        }
-        fetchProductById();
+        })();
     },[id])
 
     if (loading) return <Loading />;
