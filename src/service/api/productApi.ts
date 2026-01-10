@@ -1,14 +1,15 @@
-import { api } from "./api";
-import type { ApiResponse } from "../../types/ApiResponse";
-import type { Product, Tag, TagProduct,ProductDetail } from "../../types/Product";
+import { api } from "@service/api/api";
+import type { ApiResponse } from "@models/ApiResponse";
+import type { Product,ProductDetail,Tag,TagProduct } from "@models/Product";
 
 /**
- * Get all products.
- * @returns ApiResponse containing a list of products
+ * Fetch all available products.
+ *
+ * @returns API response containing a list of products
  */
-export async function getProducts():Promise<ApiResponse<Product[]>>{
+export async function getProducts(): Promise<ApiResponse<Product[]>>{
     const response = await api.get<ApiResponse<Product[]>>("/products");
-    if (!response.data || !response.data.data) {
+    if (!response.data?.data) {
         throw new Error("Invalid API response");
       }
     return response.data;
@@ -16,38 +17,41 @@ export async function getProducts():Promise<ApiResponse<Product[]>>{
 
 
 /**
- * Get special product.
- * @param productId--unique id for product
- * @returns ApiResponse containing the product
+ * Fetch a single product by its unique identifier.
+ *
+ * @param productId - Unique identifier of the product
+ * @returns API response containing the product details
  */
-export async function getProductById(productId:number):Promise<ApiResponse<ProductDetail>>{
+export async function getProductById(productId:number): Promise<ApiResponse<ProductDetail>>{
     const response = await api.get<ApiResponse<ProductDetail>>(`/products/${productId}`);
-    if (!response.data || !response.data.data) {
-        throw new Error("Invalid API response");
-      }
-    return response.data
-}
-
-/**
- * Get all tags
- * @returns ApiResponse containing a list of tags
- */
-export async function getTags():Promise<ApiResponse<Tag[]>>{
-    const response = await api.get<ApiResponse<Tag[]>>("/tags");
-    if (!response.data || !response.data.data) {
+    if (!response.data?.data) {
         throw new Error("Invalid API response");
       }
     return response.data;
 }
 
 /**
- * Get all products which have the same tag
- * @param tagId--The tag identifier for filtering products
- * @returns ApiResponse containing a list of products under the same tagId
+ * Fetch all available product tags.
+ *
+ * @returns API response containing a list of tags
  */
-export async function getProductsByTagId(tagId:number):Promise<ApiResponse<TagProduct>>{
+export async function getTags(): Promise<ApiResponse<Tag[]>>{
+    const response = await api.get<ApiResponse<Tag[]>>("/tags");
+    if (!response.data?.data) {
+        throw new Error("Invalid API response");
+      }
+    return response.data;
+}
+
+/**
+ * Fetch products associated with a specific tag.
+ *
+ * @param tagId - Identifier of the tag used for filtering products
+ * @returns API response containing products grouped under the given tag
+ */
+export async function getProductsByTagId(tagId:number): Promise<ApiResponse<TagProduct>>{
     const response = await api.get<ApiResponse<TagProduct>>(`/tags/${tagId}`); 
-    if (!response.data || !response.data.data) {
+    if (!response.data?.data) {
         throw new Error("Invalid API response");
       } 
     return response.data;

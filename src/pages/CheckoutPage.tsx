@@ -17,7 +17,7 @@ import { useEffect } from "react";
 import { useCartStore } from "../store/cartStore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createOrder, buildOrderPayload } from "../service/orderService";
+import { submitOrder, buildOrderPayload } from "../service/orderService";
 import type { Customer } from "../types/Order";
 import { CustomerForm } from "../components/CustomerForm";
 import { OrderItemCard } from "../components/OrderItemCard";
@@ -51,14 +51,14 @@ export default function CheckoutPage() {
         try {
             setErrorMsg(null);
             const orderPayload = buildOrderPayload(customer,items,totalPris);
-            const response = await createOrder(orderPayload, USER_ID);
+            const order = await submitOrder(orderPayload, USER_ID);
             clearCart();
             localStorage.removeItem(CUSTOMER_STORAGE_KEY);
-            const orderId = response.data.id;
+            //const orderId = response.data.id;
 
-            navigate(`/success/${orderId}`,{
+            navigate(`/success/${order.data.id}`,{
                 state:{
-                    order: response.data,},
+                    order},
             });
    
         } catch (error) {
@@ -73,6 +73,8 @@ export default function CheckoutPage() {
           JSON.stringify(customer)
         );
       }, [customer]);
+
+      if (errorMsg) return <Error message ={errorMsg} />;
 
     return (
         <div className="container mt-4">

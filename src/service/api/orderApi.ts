@@ -1,7 +1,7 @@
-import { api } from "./api";
-import type { ApiResponse } from "../../types/ApiResponse";
-import type { OrderPayload } from "../../types/Order";
-import type { OrderResponse } from "../../types/Order";
+import { api } from "@service/api/api";
+import type { ApiResponse } from "@models/ApiResponse";
+import type { OrderPayload } from "@models/Order";
+import type { OrderResult } from "@models/Order";
 
 
 /**
@@ -10,10 +10,10 @@ import type { OrderResponse } from "../../types/Order";
  * @param userId -- the Id of user for who places the order
  * @returns ApiResponse indicating whether the order was successfully created
  */
-export async function post(orderPayload:OrderPayload, userId: number):Promise<ApiResponse<OrderResponse>>{
+export async function createOrder(orderPayload:OrderPayload, userId: number): Promise<ApiResponse<OrderResult>>{
     
-    const response = await api.post<ApiResponse<OrderResponse>>(`/users/${userId}/orders`,orderPayload);
-    if (!response.data || !response.data.data) {
+    const response = await api.post<ApiResponse<OrderResult>>(`/users/${userId}/orders`,orderPayload);
+    if (response.data.status !== "success") {
         throw new Error("Invalid API response when creating order");
       }
     return response.data;

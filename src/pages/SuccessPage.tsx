@@ -8,13 +8,13 @@
  */
 
 import { useLocation, useParams, Link } from "react-router-dom";
-import type { OrderResponse } from "@models/Order";
+import type { OrderResult } from "@models/Order";
 
 export default function SuccessPage() {
   const { orderId } = useParams();
   const location = useLocation();
 
-  const order = location.state?.order as OrderResponse | undefined;
+  const order = location.state?.order as OrderResult | undefined;
 
   if (!order) {
     return (
