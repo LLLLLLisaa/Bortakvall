@@ -1,16 +1,14 @@
 import {create} from "zustand";
-import type { CartItem } from "../types/Cart";
-import type { ProductDetail,Product } from "../types/Product";
-import * as cartService from "../storage/cartStorage";
+
+import type { CartItem } from "@models/Cart";
+import type { ProductDetail,Product } from "@models/Product";
+import * as cartService from "@service/cartService";
 
 /**
  * CartStore defines the global cart state and available cart actions.
  */
 interface CartStore {
-    /** All items currently in the cart */
     items: CartItem[];
-
-    /** Total number of items in the cart (sum of quantities) */
     totalItems: number;
 
     /** Total price of all items in the cart */

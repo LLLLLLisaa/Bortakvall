@@ -1,3 +1,10 @@
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+
+import { CartItemCard } from "@components/CartItemCard";
+import { useCartStore } from "@store/cartStore";
+import Error from "@components/Error";
+
 /**
  * CartPage
  *
@@ -12,13 +19,6 @@
  * Cart data and actions are retrieved from the global cart store (Zustand),
  * ensuring shared cart state across the application.
  */
-
-import { useNavigate } from "react-router-dom";
-import { CartItemCard } from "../components/CartItemCard";
-import { useCartStore } from "../store/cartStore";
-import { useState } from "react";
-import Error from "../components/Error";
-
 export default function CartPage() {
   
   const navigate = useNavigate();

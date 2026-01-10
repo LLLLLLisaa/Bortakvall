@@ -41,6 +41,7 @@ export default function ProductPage() {
 
         setLoading(true);
         setErrorMsg(null);
+        setProduct(null);
         
         (async() =>{
             try {

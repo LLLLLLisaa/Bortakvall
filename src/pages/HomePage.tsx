@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+
 import { ProductCard } from "@components/ProductCard";
 import type { Product } from "@models/Product";
 import Loading from "@components/Loading";
@@ -32,6 +33,7 @@ export default function HomePage() {
            } catch (error) {
             console.error(error);
             setErrorMsg("Kunde inte ladda produkter")
+            setProducts([]);
           }finally{
             setLoading(false);
           }
@@ -39,7 +41,7 @@ export default function HomePage() {
         ();
     },[])
 
-    if (loading) return <Loading />;
+    if (loading && products.length === 0) return <Loading />;
     if (errorMsg) return <Error message ={errorMsg} />;
 
     return (
@@ -51,6 +53,12 @@ export default function HomePage() {
                     Gå till varukorg
                 </Link>
            </div>
+
+           {products.length === 0 && (
+            <div className="alert alert-info">
+                Inga produkter hittades under denna tag.
+            </div>
+            )}
 
             <div className="row">
                 {products.map(product => (

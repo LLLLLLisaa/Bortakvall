@@ -1,18 +1,41 @@
-import type { CartItem } from "../types/Cart";
-import type { Product } from "../types/Product";
+import type { CartItem } from "@models/Cart";
+import type { Product } from "@models/Product";
 
 /**
- * Returns a shallow copy of all items currently in the cart.
+ * Cart service
  *
- * @returns {CartItem[]} Array of cart items
+ * Responsibilities:
+ * - Encapsulates cart domain logic (quantity rules, stock limits, removal)
+ * - Manages cart persistence using localStorage
+ *
+ * Design note:
+ * This module currently combines domain logic and persistence for simplicity.
+ * If the application grows, persistence logic can be extracted into
+ * a separate layer without affecting the UI or store layers.
  */
 
 const CART_STORAGE_KEY = "cart";
+
+/**
+ * Loads cart data from localStorage.
+ *
+ * Persistence concern:
+ * - This function handles localStorage access directly.
+ * - In a larger application, persistence could be extracted
+ *   into a dedicated persistence layer.
+ */
 function loadCart(): CartItem[] {
     const raw = localStorage.getItem(CART_STORAGE_KEY);
     return raw ? JSON.parse(raw) : [];
 }
 
+/**
+ * Persists the current cart state to localStorage.
+ *
+ * Persistence concern:
+ * - This function is responsible only for storage.
+ * - Kept here for simplicity in the current project scope.
+ */
 function saveCart(cart: CartItem[]): void {
     localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
 }
@@ -96,4 +119,5 @@ export function removeItem(productId: number):void {
 
 export function clearCart(): void {
     cart = [];
+    saveCart(cart);
   }

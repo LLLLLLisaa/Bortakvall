@@ -2,6 +2,7 @@
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+
 import type { Product} from "@models/Product";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
@@ -13,25 +14,15 @@ import { fetchProductsByTagId } from "@service/productService";
  *
  * Displays a list of products filtered by a specific tag.
  *
- * Route param:
- * - tagId: string
- *   Retrieved from the URL using useParams().
- *   Converted to number before being used in API calls.
+ * Responsibilities:
+ * - Fetch products associated with a given tag ID
+ * - Handle loading and error states
+ * - Display the tag name as page heading
  *
- * Data handling:
- * - Fetches products by tagId from the API
- * - Stores the resulting product list in component state
- * - Stores the tag name in state for display in the page heading
- *
- * UI states:
- * - Loading state while fetching data
- * - Error state if the API request fails
- *
- * This page allows users to:
- * - Browse products under a specific tag
- * - Navigate to individual product detail pages
+ * Page actions:
+ * - Navigate to cart page
+ * - Navigate to product detail pages
  */
-
 export default function TagPage() {
   const {tagId} = useParams();
   const [products, setProducts] = useState<Product[]>([]);
@@ -41,7 +32,11 @@ export default function TagPage() {
 
 
   useEffect(()=>{
-    if(!tagId) return;
+    if (!tagId) {
+      setErrorMsg("Ogiltig tag");
+      setLoading(false);
+      return;
+    }
     (async() =>{
       try {
         const tagProduct = await fetchProductsByTagId(Number(tagId));
@@ -51,7 +46,8 @@ export default function TagPage() {
         setTagName(tagName);
       } catch (error) {
         console.error(error);
-        setErrorMsg("Kunde inte ladda produktern under tag")
+        setErrorMsg("Kunde inte ladda produkten under tag")
+        setProducts([]);
         
       }finally{
         setLoading(false)
@@ -59,7 +55,7 @@ export default function TagPage() {
     })();
   },[tagId])
 
-    if (loading) return <Loading />;
+   if (loading && products.length === 0) return <Loading />;
     if (errorMsg) return <Error message ={errorMsg} />;
   
 
@@ -74,6 +70,12 @@ export default function TagPage() {
             Gå till varukorg
           </Link>
         </div>
+
+        {products.length === 0 && (
+            <div className="alert alert-info">
+                Inga produkter hittades under denna tag.
+            </div>
+            )}
 
         <div className="row">
             {products.map(product => (
