@@ -13,7 +13,7 @@
  * Navigate back to homepage
  * Navigate to successpage
  */
-
+import { useEffect } from "react";
 import { useCartStore } from "../store/cartStore";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -27,25 +27,33 @@ import Error from "../components/Error";
 
 export default function CheckoutPage() {
     const navigate =useNavigate();
-    const { items, totalPris, increaseQuantity, decreaseQuantity, clearCart} = useCartStore();
-    const [customer, setCustomer] = useState<Customer>({
-        customer_first_name: "",
-        customer_last_name: "",
-        customer_address: "",
-        customer_postcode: "",
-        customer_city: "",
-        customer_email: "",
-        customer_phone: "",
-    });
-    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    const CUSTOMER_STORAGE_KEY = "customer";
     const USER_ID = Number(import.meta.env.VITE_USER_ID);
-
+    const { items, totalPris, increaseQuantity, decreaseQuantity, clearCart} = useCartStore();
+    const [customer, setCustomer] = useState<Customer>(() => {
+        const stored = localStorage.getItem(CUSTOMER_STORAGE_KEY);
+        return stored
+          ? JSON.parse(stored)
+          : {
+              customer_first_name: "",
+              customer_last_name: "",
+              customer_address: "",
+              customer_postcode: "",
+              customer_city: "",
+              customer_email: "",
+              customer_phone: "",
+            };
+      });
+      
+    const [errorMsg, setErrorMsg] = useState<string | null>(null);
+    
     const handleSubmit = async ()=>{
         try {
             setErrorMsg(null);
             const orderPayload = buildOrderPayload(customer,items,totalPris);
             const response = await createOrder(orderPayload, USER_ID);
             clearCart();
+            localStorage.removeItem(CUSTOMER_STORAGE_KEY);
             const orderId = response.data.id;
 
             navigate(`/success/${orderId}`,{
@@ -58,6 +66,13 @@ export default function CheckoutPage() {
             setErrorMsg("Kunde inte lägga beställningen. Försök igen.");
         }
     }
+
+    useEffect(() => {
+        localStorage.setItem(
+          CUSTOMER_STORAGE_KEY,
+          JSON.stringify(customer)
+        );
+      }, [customer]);
 
     return (
         <div className="container mt-4">

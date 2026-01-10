@@ -13,5 +13,8 @@ import type { OrderResponse } from "../../types/Order";
 export async function post(orderPayload:OrderPayload, userId: number):Promise<ApiResponse<OrderResponse>>{
     
     const response = await api.post<ApiResponse<OrderResponse>>(`/users/${userId}/orders`,orderPayload);
+    if (!response.data || !response.data.data) {
+        throw new Error("Invalid API response when creating order");
+      }
     return response.data;
 }

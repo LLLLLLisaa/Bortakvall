@@ -8,6 +8,9 @@ import type { Product, Tag, TagProduct,ProductDetail } from "../../types/Product
  */
 export async function getProducts():Promise<ApiResponse<Product[]>>{
     const response = await api.get<ApiResponse<Product[]>>("/products");
+    if (!response.data || !response.data.data) {
+        throw new Error("Invalid API response");
+      }
     return response.data;
 }
 
@@ -19,7 +22,9 @@ export async function getProducts():Promise<ApiResponse<Product[]>>{
  */
 export async function getProductById(productId:number):Promise<ApiResponse<ProductDetail>>{
     const response = await api.get<ApiResponse<ProductDetail>>(`/products/${productId}`);
-    
+    if (!response.data || !response.data.data) {
+        throw new Error("Invalid API response");
+      }
     return response.data
 }
 
@@ -29,6 +34,9 @@ export async function getProductById(productId:number):Promise<ApiResponse<Produ
  */
 export async function getTags():Promise<ApiResponse<Tag[]>>{
     const response = await api.get<ApiResponse<Tag[]>>("/tags");
+    if (!response.data || !response.data.data) {
+        throw new Error("Invalid API response");
+      }
     return response.data;
 }
 
@@ -38,6 +46,9 @@ export async function getTags():Promise<ApiResponse<Tag[]>>{
  * @returns ApiResponse containing a list of products under the same tagId
  */
 export async function getProductsByTagId(tagId:number):Promise<ApiResponse<TagProduct>>{
-    const response = await api.get<ApiResponse<TagProduct>>(`/tags/${tagId}`);  
+    const response = await api.get<ApiResponse<TagProduct>>(`/tags/${tagId}`); 
+    if (!response.data || !response.data.data) {
+        throw new Error("Invalid API response");
+      } 
     return response.data;
 }
