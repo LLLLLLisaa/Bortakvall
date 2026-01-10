@@ -1,19 +1,13 @@
-/**
- * Data needed
- * Selected product
- * Loading state for product
- * Error state
- * 
- * Page state(local)
- * Selected quantity (optional, default = 1)
- * 
- * Page action
- * Fetch product by id
- * Add product to cart
- * Navigate to checkoutpage
- * Navigate back to homepage
- * Navigate to tagPage
- */
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
+
+import type { ProductDetail } from "@models/Product";
+import Loading from "@components/Loading";
+import Error from "@components/Error";
+import { useCartStore } from "@store/cartStore";
+import { fetchProductById } from "@service/productService";
+
 
 /**
  * ProductPage
@@ -29,18 +23,6 @@
  * Integration:
  * - Uses global cart store (Zustand) to manage cart state
  */
-
-
-
-import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-
-import type { ProductDetail } from "@models/Product";
-import Loading from "@components/Loading";
-import Error from "@components/Error";
-import { useCartStore } from "@store/cartStore";
-import { fetchProductById } from "@service/productService";
-
 export default function ProductPage() {
     
     const IMAGE_BAS = import.meta.env.VITE_IMAGE_BASE;
@@ -166,6 +148,13 @@ export default function ProductPage() {
                         }>
                     Lägg i kundvagn
                     </button>
+                </div>
+
+                {/* Go to cart */}
+                <div className="mt-3">
+                    <Link to="/cart" className="btn btn-outline-secondary">
+                        Gå till varukorg
+                    </Link>
                 </div>
         
             </div>

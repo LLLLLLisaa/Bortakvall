@@ -16,7 +16,7 @@ export function Header() {
     >
         {/* Top bar */}
         <div style={{ backgroundColor: "#ffffff" }}>
-            <div className="container d-flex justify-content-end align-items-center py-2">
+            <div className="container d-flex justify-content-start align-items-center py-2">
                 <Link
                     to="/cart"
                     className="d-flex align-items-center gap-2 text-decoration-none text-dark"

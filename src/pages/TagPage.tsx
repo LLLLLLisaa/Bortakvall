@@ -1,7 +1,7 @@
 
 import { useEffect,useState } from "react";
 import { useParams } from "react-router-dom";
-
+import { Link } from "react-router-dom";
 import type { Product} from "@models/Product";
 import Loading from "@components/Loading";
 import Error from "@components/Error";
@@ -66,7 +66,14 @@ export default function TagPage() {
 
     return (
       <main className="container">
-        <h1 className="my-4 d-none d-lg-block">{tagName}</h1>
+       
+        <div className="d-flex justify-content-between align-items-center my-4">
+          <h1 className="mb-0 d-none d-lg-block">{tagName}</h1>
+
+          <Link to="/cart" className="btn btn-outline-primary">
+            Gå till varukorg
+          </Link>
+        </div>
 
         <div className="row">
             {products.map(product => (
