@@ -1,4 +1,3 @@
-// components/OrderItemCard.tsx
 import { Link } from "react-router-dom";
 import type { CartItem } from "../types/Cart";
 
@@ -8,7 +7,15 @@ interface OrderItemCardProps {
   onDecrease: () => void;
 }
 
-// components/OrderItemCard.tsx
+/**
+ * OrderItemCard
+ *
+ * Presentational component for displaying a single order item
+ * in the checkout order summary.
+ *
+ * - Displays product name, quantity controls and item subtotal
+ */
+
 export function OrderItemCard({ item, onIncrease, onDecrease}: OrderItemCardProps) {
     const subtotal = item.price * item.quantity;
   

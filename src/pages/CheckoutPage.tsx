@@ -1,12 +1,12 @@
-import { useEffect } from "react";
-import { useCartStore } from "../store/cartStore";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { submitOrder, buildOrderPayload } from "../service/orderService";
-import type { Customer } from "../types/Order";
-import { CustomerForm } from "../components/CustomerForm";
-import { OrderItemCard } from "../components/OrderItemCard";
-import Error from "../components/Error";
+
+import { useCartStore } from "@store/cartStore";
+import { submitOrder,buildOrderPayload } from "@service/orderService";
+import type { Customer } from "@models/Order";
+import { CustomerForm } from "@components/CustomerForm";
+import { OrderItemCard } from "@components/OrderItemCard";
+import Error from "@components/Error";
 
 /**
  * CheckoutPage

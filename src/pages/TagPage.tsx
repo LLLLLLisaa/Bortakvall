@@ -18,10 +18,6 @@ import { fetchProductsByTagId } from "@service/productService";
  * - Fetch products associated with a given tag ID
  * - Handle loading and error states
  * - Display the tag name as page heading
- *
- * Page actions:
- * - Navigate to cart page
- * - Navigate to product detail pages
  */
 export default function TagPage() {
   const {tagId} = useParams();

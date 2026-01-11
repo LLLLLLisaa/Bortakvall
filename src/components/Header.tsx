@@ -3,6 +3,15 @@ import { useCartStore } from "../store/cartStore";
 
 const colors = ["#ff6f91", "#ff9671", "#ffc75f", "#845ec2", "#4d96ff"];
 
+/**
+ * Header
+ *
+ * Global application header.
+ *
+ * - Displays a link to the cart with item count
+ * - Shows the application title with decorative styling
+ * - Uses global cart state to reflect current cart status
+ */
 export function Header() {
   const title = "Bortakväll";
   const totalItems = useCartStore((state) => state.totalItems);

@@ -2,12 +2,13 @@ import { useLocation, useParams, Link } from "react-router-dom";
 import type { OrderResult } from "@models/Order";
 
 /**
- * Data needed
- * Order status (success)
- * 
- * Page action
- * Clear cart (if not already cleared)
- *  Navigate back to home page
+ * SuccessPage
+ *
+ * Displays order confirmation after a successful checkout.
+ *
+ * Responsibilities:
+ * - Read order data passed via navigation state
+ * - Display basic order information (id, total, date)
  */
 export default function SuccessPage() {
   const { orderId } = useParams();

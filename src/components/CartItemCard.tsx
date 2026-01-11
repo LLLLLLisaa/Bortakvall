@@ -1,5 +1,6 @@
-import type { CartItem } from "../types/Cart";
 import { Link } from "react-router-dom";
+import type { CartItem } from "@models/Cart";
+
 
 type Props = {
   item: CartItem;
@@ -8,6 +9,15 @@ type Props = {
   onRemove: () => void;
 };
 
+
+/**
+ * CartItemCard
+ *
+ * Displays a single cart item with:
+ * - Product image and name (clickable, links to product page)
+ * - Quantity controls (increase / decrease)
+ * - Remove button
+ */
 export function CartItemCard({
   item,
   onIncrease,

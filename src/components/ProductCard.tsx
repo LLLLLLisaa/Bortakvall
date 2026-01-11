@@ -1,11 +1,20 @@
 import type { Product } from "../types/Product";
 import { Link } from "react-router-dom";
-import { useCartStore } from "../store/cartStore";
+import { useCartStore } from "@store/cartStore";
 
 type ProductCardProps ={
     product: Product;
 }
 
+/**
+ * ProductCard
+ *
+ * Presentational component for displaying a single product
+ * in product listings (home page, tag page, etc.).
+ *
+ * - Displays product image, name and price
+ * - Provides quick actions: view details and add to cart
+ */
 export function ProductCard({product}: ProductCardProps){
     const IMAGE_BAS = import.meta.env.VITE_IMAGE_BASE;
     const addToCart = useCartStore((state) => state.addToCart);

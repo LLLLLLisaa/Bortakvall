@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { Category } from "../types/Category";
+import type { Category } from "@models/Product";
 
 /**
  * TagBar component
@@ -10,10 +10,7 @@ import type { Category } from "../types/Category";
  * - On small and medium screens (mobile/tablet), categories are shown in a dropdown menu.
  * - Categories are provided via props and are dynamically generated from API data.
  * - Each category links to its corresponding tag page.
- *
- * This component is purely presentational and does not fetch or manage data itself.
  */
-
 type TagBarProps = {
   categories: Category[];
 };
