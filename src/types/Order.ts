@@ -41,7 +41,7 @@ export interface OrderItem {
 export interface OrderResult {
     id: number;          
     order_total: number; 
-    order_date: string;  
+    order_date: string; 
   }
 
  /**

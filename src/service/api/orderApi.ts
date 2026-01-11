@@ -13,8 +13,12 @@ import type { OrderResult } from "@models/Order";
 export async function createOrder(orderPayload:OrderPayload, userId: number): Promise<ApiResponse<OrderResult>>{
     
     const response = await api.post<ApiResponse<OrderResult>>(`/users/${userId}/orders`,orderPayload);
+
     if (response.data.status !== "success") {
-        throw new Error("Invalid API response when creating order");
+        const errorMsg = response.data.message;
+        console.log("---error reason from api---", errorMsg)   
+        console.log("---data of unsuccesful result---", response.data);
+        throw new Error(errorMsg+". Please make sure the email address is valid.");
       }
     return response.data;
 }

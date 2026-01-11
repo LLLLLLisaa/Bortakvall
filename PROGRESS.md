@@ -68,5 +68,10 @@
  - Persisted customer information in checkout using localStorage and cleared it after successful order submission.
 
 
+## Day 10 – 2026-01-10
+ - Improved error handling for order submission.
+  - The application now shows an error message when order creation fails,
+    and only navigates to the success page when a valid order is returned
+    from the backend.
 
 

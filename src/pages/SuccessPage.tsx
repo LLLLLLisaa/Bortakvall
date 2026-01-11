@@ -1,3 +1,6 @@
+import { useLocation, useParams, Link } from "react-router-dom";
+import type { OrderResult } from "@models/Order";
+
 /**
  * Data needed
  * Order status (success)
@@ -6,10 +9,6 @@
  * Clear cart (if not already cleared)
  *  Navigate back to home page
  */
-
-import { useLocation, useParams, Link } from "react-router-dom";
-import type { OrderResult } from "@models/Order";
-
 export default function SuccessPage() {
   const { orderId } = useParams();
   const location = useLocation();

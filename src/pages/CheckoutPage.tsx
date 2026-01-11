@@ -1,18 +1,3 @@
-/**
- * Data needed
- * Cart items
- * Total price
- * Order submission status (loading / success / error)
- * 
- * Page state(local)
- * Customer form data (name, address, email, etc.)
- * 
- * Page action
- * Submit order
- * Navigate back to cartpage
- * Navigate back to homepage
- * Navigate to successpage
- */
 import { useEffect } from "react";
 import { useCartStore } from "../store/cartStore";
 import { useState } from "react";
@@ -23,27 +8,38 @@ import { CustomerForm } from "../components/CustomerForm";
 import { OrderItemCard } from "../components/OrderItemCard";
 import Error from "../components/Error";
 
-
-
+/**
+ * CheckoutPage
+ *
+ * Handles the checkout process:
+ * - Displays cart items and total price
+ * - Collects customer information
+ * - Submits the order to the backend
+ *
+ * Navigates to the success page only when the order
+ * is successfully created, otherwise shows an error message.
+ */
 export default function CheckoutPage() {
-    const navigate =useNavigate();
     const CUSTOMER_STORAGE_KEY = "customer";
     const USER_ID = Number(import.meta.env.VITE_USER_ID);
+
+    const navigate =useNavigate();
     const { items, totalPris, increaseQuantity, decreaseQuantity, clearCart} = useCartStore();
-    const [customer, setCustomer] = useState<Customer>(() => {
-        const stored = localStorage.getItem(CUSTOMER_STORAGE_KEY);
-        return stored
-          ? JSON.parse(stored)
-          : {
-              customer_first_name: "",
-              customer_last_name: "",
-              customer_address: "",
-              customer_postcode: "",
-              customer_city: "",
-              customer_email: "",
-              customer_phone: "",
-            };
-      });
+    const [customer, setCustomer] = useState<Customer>(
+        () => {        
+            const stored = localStorage.getItem(CUSTOMER_STORAGE_KEY);
+                return stored
+                ? JSON.parse(stored)
+                : {
+                    customer_first_name: "",
+                    customer_last_name: "",
+                    customer_address: "",
+                    customer_postcode: "",
+                    customer_city: "",
+                    customer_email: "",
+                    customer_phone: "",
+                    };
+            });
       
     const [errorMsg, setErrorMsg] = useState<string | null>(null);
     
@@ -62,8 +58,9 @@ export default function CheckoutPage() {
             });
    
         } catch (error) {
-            console.error(error);   
-            setErrorMsg("Kunde inte lägga beställningen. Försök igen.");
+            console.log(error);   
+            //setErrorMsg("Kunde inte lägga beställningen. Försök igen.");
+            setErrorMsg(error.message);
         }
     }
 
@@ -79,12 +76,6 @@ export default function CheckoutPage() {
           <h1 className="mb-4">Kassa</h1>
       
           {errorMsg && <Error message={errorMsg} />}
-
-        {/*  {errorMsg && (
-  <div style={{ background: "red", color: "white", padding: "16px" }}>
-    ERROR: {errorMsg}
-  </div>
-)} */}
 
           {/* Orderöversikt */}
          <div className="card mb-4">
@@ -106,9 +97,8 @@ export default function CheckoutPage() {
                 </div>
             </div>
          </div>
-
-      
-          {/* Leveransadress */}
+    
+         {/* Leveransadress */}
           <div className="card mb-5">
             <div className="card-body bg-info bg-opacity-10 rounded">
               <h5 className="card-title mb-3">Leveransadress</h5>
