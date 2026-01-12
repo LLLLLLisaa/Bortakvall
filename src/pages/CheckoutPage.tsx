@@ -57,13 +57,13 @@ export default function CheckoutPage() {
                     order: response.data,},
             });
    
-        } catch (error) {
+        } catch (err) {
             /* console.log(error);   
             setErrorMsg(error.message); */
 
 
-            const message = err instanceof Error ? err.message : String(err);
-            console.log(message);   
+            //const message = err instanceof Error ? err.message : String(err);
+            //console.log(message);   
             //setErrorMsg("Kunde inte lägga beställningen. Försök igen.");
             setErrorMsg("Please make sure the email address is valid.");
         }

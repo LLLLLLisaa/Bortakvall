@@ -41,7 +41,7 @@ export default function TagPage() {
         setProducts(products);
         setTagName(tagName);
       } catch (error) {
-        console.error(error);
+        //console.error(error);
         setErrorMsg("Kunde inte ladda produkten under tag")
         setProducts([]);
         

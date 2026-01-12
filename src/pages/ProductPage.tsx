@@ -48,7 +48,7 @@ export default function ProductPage() {
                 const product = await fetchProductById(Number(id));
                 setProduct(product);
             } catch (error) {
-                console.error(error);
+                //console.error(error);
                 setErrorMsg("Kunde inte ladda produkten");   
             }finally{
                 setLoading(false);

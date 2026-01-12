@@ -31,7 +31,7 @@ export default function HomePage() {
             setProducts(products)
             
            } catch (error) {
-            console.error(error);
+            //console.error(error);
             setErrorMsg("Kunde inte ladda produkter")
             setProducts([]);
           }finally{

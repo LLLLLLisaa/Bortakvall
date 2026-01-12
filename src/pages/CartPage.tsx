@@ -37,7 +37,7 @@ export default function CartPage() {
       increaseQuantity(productId);
       
     } catch (error) {
-      console.error(error);
+      //console.error(error);
       setErrorMsg("Det går inte att lägga till fler av denna produkt.");  
     }
   }
