@@ -58,9 +58,14 @@ export default function CheckoutPage() {
             });
    
         } catch (error) {
-            console.log(error);   
+            /* console.log(error);   
+            setErrorMsg(error.message); */
+
+
+            const message = err instanceof Error ? err.message : String(err);
+            console.log(message);   
             //setErrorMsg("Kunde inte lägga beställningen. Försök igen.");
-            setErrorMsg(error.message);
+            setErrorMsg("Please make sure the email address is valid.");
         }
     }
 
