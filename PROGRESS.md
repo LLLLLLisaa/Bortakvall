@@ -75,3 +75,13 @@
     from the backend.
 
 
+## Day 11 – 2026-01-11
+ - Checked the overall functionality
+ - Fixed a TypeScript build error related to error handling in CheckoutPage
+
+
+## Day 12 – 2026-01-12
+ - Deployed the application to Netlify
+ - Tested the deployed site on both desktop and mobile
+
+
